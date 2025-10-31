@@ -40,7 +40,38 @@ class TicTacToe():
         self.font= pygame.font.SysFont("Courier New", 35)
         self.FPS = pygame.time.Clock()
 
-pygame.display.update()
+# draw table representation 
+
+def _draw_table(self):
+    tb_space_point = (self.table_space, self.table_size - self.table_space)
+    cell_space_point = (self.cell_size, self.ell_size * 2)
+    r1 = pygame.draw.line (screen, self.table_color, [tb_space_point[0], cell_space_point[0]], [tb_space_point[1], cell_space_point[0]], 8)
+    c1 = pygame.draw.line(screen, self.table_color, [cell_space_point[0], tb_space_point[0]], [cell_space_point[0], tb_space_point[1]], 8)
+    r2 = pygame.draw.line (screen, self.table_color, [tb_space_point[0], cell_space_point[1]], [tb_space_point[1], cell_space_point[1]], 8)
+    c2 = pygame.draw.line(screen, self.table_color, [cell_space_point[1], tb_space_point[0]], [tb_space_point[1], tb_space_point[1]], 8 )
+
+def _chang_player(self):
+    self.player = "O" if self.player == "X" else "X"
+
+# processing clicks to move
+def _move(self, pos):
+    try:
+
+        x, y = pos[0] // self.cell_size, pos[1] // self.cell_size
+        if self.table[x][y] == "-":
+            self.table[x][y] = self.player
+            self._draw_char(x, y, self.player)
+            self._game_check()
+            self._chang_player()
+
+    except:
+        print("Click inside the table only")
+
+#draw character of the reent player to the selected table cell
+def _draw_char(self, x, y, player):
+    if self.player == "O":
+        img = pygame.image.load("images/Tc-O.png")
+
  
 while running:
     for event in pygame.event.get():
